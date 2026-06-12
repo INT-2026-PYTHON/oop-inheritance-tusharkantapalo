@@ -94,11 +94,9 @@ animal_sound = input("Enter the sound of the animal: ")
 
 animal = Animal(animal_name, animal_sound)
 
-n = int(input("Enter the number of dog breed: "))
-
 dog_record = []
 
-for i in range(n):
+for i in range(2):
     dog_name = input("Enter the name of the dog: ")
     dog_breed = input("Enter the breed of the dog: ")
 
