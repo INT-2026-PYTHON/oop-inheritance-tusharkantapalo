@@ -112,3 +112,106 @@ Explanation:
 =================================================
 
 """
+
+
+class Shape:
+    def __init__(self, name):
+        self.name = name
+
+    def area(self):
+        raise NotImplementedError(
+            "Child classes must override area()"
+            )
+
+    def perimeter(self):
+        raise NotImplementedError(
+            "Child classes must override perimeter()"
+            )
+
+    def describe(self):
+        print(f"{self.name}: "
+            f"area={self.area()}, "
+            f"perimeter={self.perimeter()}")
+        
+class Circle(Shape):
+
+    def __init__(self, radius):
+        super().__init__("Circle")
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+    
+    def perimeter(self):
+        return 2 * 3.14 * self.radius
+    
+class Ractangle(Shape):
+
+    def __init__(self, length, width):
+        super().__init__("Rectangle")
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+    
+    def perimeter(self):
+        return 2 * (self.length + self.width)
+    
+class Triangle(Shape):
+
+    def __init__(self, a, b, c):
+        super().__init__("Triangle")
+        self.a = a
+        self.b = b
+        self.c = c
+        self.s = (a + b + c) / 2
+
+    def area(self):
+        return (self.s * (self.s - self.a) * (self.s - self.b) * (self.s - self.c)) ** 0.5
+    
+    def perimeter(self):
+        return self.a + self.b + self.c
+    
+
+try:
+    shape = Shape("Shape")
+    shape.describe()
+except NotImplementedError as e:
+    print(e)
+
+shapes = []
+
+n = int(input("Enter number of shapes: "))
+
+for i in range(n):
+
+    shape_type = input(
+        "Enter shape type (circle/rectangle/triangle): "
+    ).lower()
+
+    if shape_type == "circle":
+        radius = float(input("Enter radius: "))
+        shapes.append(Circle(radius))
+
+    elif shape_type == "rectangle":
+        length = float(input("Enter length: "))
+        width = float(input("Enter width: "))
+        shapes.append(Ractangle(length, width))
+
+    elif shape_type == "triangle":
+        a = float(input("Enter side a: "))
+        b = float(input("Enter side b: "))
+        c = float(input("Enter side c: "))
+        shapes.append(Triangle(a, b, c))
+
+    else:
+        print("Invalid shape type!")
+
+for shape in shapes:
+    shape.describe()
+
+print("\nShape Details:\n")
+
+for shape in shapes:
+    shape.describe()
